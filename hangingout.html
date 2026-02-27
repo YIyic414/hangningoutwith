@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上海溜娃路线定制</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4CAF50',
+                        secondary: '#2196F3',
+                        accent: '#FF9800',
+                    },
+                    fontFamily: {
+                        sans: ['PingFang SC', 'Microsoft YaHei', 'sans-serif'],
+                    },
+                },
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="bg-primary text-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-child text-2xl"></i>
+                <h1 class="text-xl font-bold">上海溜娃路线定制</h1>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#" class="hover:text-accent transition-colors">首页</a>
+                <a href="#about" class="hover:text-accent transition-colors">关于我们</a>
+                <a href="#contact" class="hover:text-accent transition-colors">联系我们</a>
+            </div>
+            <button class="md:hidden text-white">
+                <i class="fa fa-bars text-xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section class="bg-gradient-to-r from-primary to-secondary text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 text-shadow">个性化溜娃路线</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">输入您的溜娃时间和预算，我们为您推荐上海本地最适合的溜娃地点</p>
+            <div class="flex justify-center">
+                <a href="#form" class="bg-accent hover:bg-orange-500 text-white font-bold py-3 px-6 rounded-full transition-colors shadow-lg">
+                    开始定制
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 表单区域 -->
+    <section id="form" class="py-12">
+        <div class="container mx-auto px-4">
+            <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h3 class="text-2xl font-bold mb-6 text-center text-gray-800">填写溜娃需求</h3>
+                <form id="tripForm" class="space-y-6">
+                    <!-- 溜娃时间 -->
+                    <div>
+                        <label for="time" class="block text-gray-700 font-medium mb-2">溜娃时间</label>
+                        <select id="time" name="time" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                            <option value="morning">上午 (9:00-12:00)</option>
+                            <option value="afternoon">下午 (13:00-17:00)</option>
+                            <option value="evening">晚上 (18:00-21:00)</option>
+                            <option value="full-day">全天 (9:00-17:00)</option>
+                        </select>
+                    </div>
+
+                    <!-- 是否免费 -->
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">是否免费</label>
+                        <div class="flex space-x-4">
+                            <label class="flex items-center">
+                                <input type="radio" name="free" value="yes" class="mr-2" checked>
+                                <span>免费</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="free" value="no" class="mr-2">
+                                <span>付费</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="free" value="both" class="mr-2">
+                                <span>都可以</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 孩子年龄 -->
+                    <div>
+                        <label for="age" class="block text-gray-700 font-medium mb-2">孩子年龄</label>
+                        <select id="age" name="age" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                            <option value="0-3">0-3岁</option>
+                            <option value="3-6">3-6岁</option>
+                            <option value="6-12">6-12岁</option>
+                            <option value="all">不限</option>
+                        </select>
+                    </div>
+
+                    <!-- 提交按钮 -->
+                    <div class="text-center">
+                        <button type="submit" class="bg-primary hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full transition-colors shadow-lg">
+                            生成路线
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 结果区域 -->
+    <section id="results" class="py-12 bg-gray-100 hidden">
+        <div class="container mx-auto px-4">
+            <h3 class="text-2xl font-bold mb-8 text-center text-gray-800">为您推荐的溜娃路线</h3>
+            <div id="recommendations" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 推荐结果将通过JavaScript动态生成 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我们 -->
+    <section id="about" class="py-12">
+        <div class="container mx-auto px-4">
+            <h3 class="text-2xl font-bold mb-6 text-center text-gray-800">关于我们</h3>
+            <div class="max-w-3xl mx-auto text-gray-600 leading-relaxed">
+                <p class="mb-4">上海溜娃路线定制网站致力于为家长提供个性化的溜娃路线推荐，帮助您在上海找到最适合孩子的游玩场所。</p>
+                <p class="mb-4">我们的推荐基于孩子的年龄、溜娃时间和预算等因素，为您精选上海本地的优质溜娃地点，让您的亲子时光更加愉快。</p>
+                <p>无论您是想寻找免费的公园、付费的儿童乐园，还是适合不同年龄段孩子的活动，我们都能为您提供合适的推荐。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我们 -->
+    <section id="contact" class="py-12 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h3 class="text-2xl font-bold mb-6 text-center text-gray-800">联系我们</h3>
+            <div class="max-w-2xl mx-auto text-center text-gray-600">
+                <p class="mb-4">如果您有任何建议或问题，欢迎联系我们</p>
+                <div class="flex justify-center space-x-6 mb-4">
+                    <a href="#" class="text-primary hover:text-green-600 transition-colors">
+                        <i class="fa fa-weixin text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-primary hover:text-green-600 transition-colors">
+                        <i class="fa fa-weibo text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-primary hover:text-green-600 transition-colors">
+                        <i class="fa fa-envelope text-2xl"></i>
+                    </a>
+                </div>
+                <p>邮箱：contact@shanghaitrip.com</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2026 上海溜娃路线定制. 保留所有权利.</p>
+        </div>
+    </footer>
+
+    <script>
+        // 上海本地溜娃地点数据库
+        const locations = [
+            {
+                name: "上海迪士尼乐园",
+                address: "上海市浦东新区川沙新镇黄赵路310号",
+                time: ["morning", "afternoon", "full-day"],
+                free: false,
+                age: ["3-6", "6-12"],
+                description: "世界一流的主题乐园，适合全家人游玩，有各种适合儿童的游乐设施和表演。",
+                image: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Shanghai%20Disneyland%20castle%20with%20colorful%20fireworks%20at%20night&image_size=landscape_16_9",
+                rating: 4.8
+            },
+            {
+                name: "上海野生动物园",
+                address: "上海市浦东新区南六公路178号",
+                time: ["morning", "afternoon", "full-day"],
+                free: false,
+                age: ["0-3", "3-6", "6-12"],
+                description: "中国最大的野生动物园之一，有各种珍稀动物，适合带孩子了解动物世界。",
+                image: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Shanghai%20Wild%20Animal%20Park%20with%20giraffes%20and%20elephants&image_size=landscape_16_9",
+                rating: 4.6
+            },
+            {
+                name: "上海科技馆",
+                address: "上海市浦东新区世纪大道2000号",
+                time: ["morning", "afternoon"],
+                free: false,
+                age: ["3-6", "6-12"],
+                description: "互动性强的科技博物馆，有各种科学实验和展览，适合培养孩子的科学兴趣。",
+                image: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Shanghai%20Science%20and%20Technology%20Museum%20with%20interactive%20exhibits&image_size=landscape_16_9",
+                rating: 4.7
+            },
+            {
+                name: "世纪公园",
+                address: "上海市浦东新区锦绣路1001号",
+                time: ["morning", "afternoon", "evening"],
+                free: true,
+                age: ["0-3", "3-6", "6-12"],
+                description: "上海最大的城市公园，有广阔的草坪和湖泊，适合带孩子散步、野餐和玩耍。",
+                image: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Century%20Park%20Shanghai%20with%20green%20lawns%20and%20lake&image_size=landscape_16_9",
+                rating: 4.5
+            },
+            {
+                name: "上海海洋水族馆",
+                address: "上海市浦东新区陆家嘴环路1388号",
+                time: ["morning", "afternoon"],
+                free: false,
+                age: ["0-3", "3-6", "6-12"],
+                description: "亚洲最大的海洋水族馆之一，有各种海洋生物，适合带孩子了解海洋世界。",
+                image: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Shanghai%20Ocean%20Aquarium%20with%20underwater%20tunnel&image_size=landscape_16_9",
+                rating: 4.4
+            },
+            {
+                name: "鲁迅公园",
+                address: "上海市虹口区四川北路2288号",
+                time: ["morning", "afternoon", "evening"],
+                free: true,
+                age: ["0-3", "3-6", "6-12"],
+                description: "历史悠久的城市公园，有假山、湖泊和儿童游乐设施，适合带孩子休闲游玩。",
+                image: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Lu%20Xun%20Park%20Shanghai%20with%20traditional%20Chinese%20garden&image_size=landscape_16_9",
+                rating: 4.3
+            },
+            {
+                name: "上海儿童博物馆",
+                address: "上海市长宁区宋园路61号",
+                time: ["morning", "afternoon"],
+                free: true,
+                age: ["0-3", "3-6"],
+                description: "专为儿童设计的博物馆，有各种互动展览和游戏，适合 younger children。",
+                image: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Shanghai%20Children%20Museum%20with%20colorful%20exhibits&image_size=landscape_16_9",
+                rating: 4.2
+            },
+            {
+                name: "上海环球港",
+                address: "上海市普陀区中山北路3300号",
+                time: ["morning", "afternoon", "evening"],
+                free: true,
+                age: ["3-6", "6-12"],
+                description: "大型购物中心，有儿童游乐区和各种商店，适合带孩子购物和玩耍。",
+                image: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Shanghai%20Global%20Harbor%20shopping%20mall%20with%20glass%20ceiling&image_size=landscape_16_9",
+                rating: 4.1
+            },
+            {
+                name: "上海辰山植物园",
+                address: "上海市松江区辰花公路3888号",
+                time: ["morning", "afternoon"],
+                free: false,
+                age: ["0-3", "3-6", "6-12"],
+                description: "大型植物园，有各种植物和温室，适合带孩子了解植物世界。",
+                image: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Shanghai%20Chenshan%20Botanical%20Garden%20with%20greenhouse&image_size=landscape_16_9",
+                rating: 4.4
+            }
+        ];
+
+        // 表单提交处理
+        document.getElementById('tripForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 获取表单数据
+            const time = document.getElementById('time').value;
+            const free = document.querySelector('input[name="free"]:checked').value;
+            const age = document.getElementById('age').value;
+            
+            // 过滤地点
+            const filteredLocations = locations.filter(location => {
+                // 时间过滤
+                const timeMatch = location.time.includes(time) || location.time.includes('full-day');
+                
+                // 免费过滤
+                let freeMatch = false;
+                if (free === 'yes') {
+                    freeMatch = location.free;
+                } else if (free === 'no') {
+                    freeMatch = !location.free;
+                } else {
+                    freeMatch = true;
+                }
+                
+                // 年龄过滤
+                const ageMatch = location.age.includes(age) || location.age.includes('all');
+                
+                return timeMatch && freeMatch && ageMatch;
+            });
+            
+            // 显示结果
+            displayResults(filteredLocations);
+        });
+
+        // 显示结果
+        function displayResults(locations) {
+            const resultsSection = document.getElementById('results');
+            const recommendationsDiv = document.getElementById('recommendations');
+            
+            // 清空之前的结果
+            recommendationsDiv.innerHTML = '';
+            
+            // 生成结果卡片
+            locations.forEach(location => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-lg shadow-md overflow-hidden card-hover';
+                
+                card.innerHTML = `
+                    <img src="${location.image}" alt="${location.name}" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="text-xl font-bold text-gray-800">${location.name}</h4>
+                            <span class="bg-${location.free ? 'green' : 'blue'}-100 text-${location.free ? 'green' : 'blue'}-800 text-xs font-medium px-2.5 py-0.5 rounded">
+                                ${location.free ? '免费' : '付费'}
+                            </span>
+                        </div>
+                        <div class="flex items-center mb-2">
+                            <i class="fa fa-map-marker text-red-500 mr-2"></i>
+                            <p class="text-gray-600 text-sm">${location.address}</p>
+                        </div>
+                        <div class="flex items-center mb-3">
+                            <i class="fa fa-star text-yellow-400 mr-1"></i>
+                            <span class="text-gray-700">${location.rating}</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">${location.description}</p>
+                        <button class="w-full bg-primary hover:bg-green-600 text-white font-medium py-2 px-4 rounded transition-colors">
+                            查看详情
+                        </button>
+                    </div>
+                `;
+                
+                recommendationsDiv.appendChild(card);
+            });
+            
+            // 显示结果区域
+            resultsSection.classList.remove('hidden');
+            
+            // 滚动到结果区域
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
