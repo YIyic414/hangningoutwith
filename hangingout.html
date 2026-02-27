@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>上海溜娃路线定制</title>
+    <title>每日个性化溜娃路线生成</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
@@ -46,12 +46,13 @@
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center space-x-2">
                 <i class="fa fa-child text-2xl"></i>
-                <h1 class="text-xl font-bold">上海溜娃路线定制</h1>
+                <h1 class="text-xl font-bold">每日个性化溜娃路线</h1>
             </div>
             <div class="hidden md:flex space-x-6">
                 <a href="#" class="hover:text-accent transition-colors">首页</a>
+                <a href="#history" class="hover:text-accent transition-colors">历史记录</a>
+                <a href="#favorites" class="hover:text-accent transition-colors">我的收藏</a>
                 <a href="#about" class="hover:text-accent transition-colors">关于我们</a>
-                <a href="#contact" class="hover:text-accent transition-colors">联系我们</a>
             </div>
             <button class="md:hidden text-white">
                 <i class="fa fa-bars text-xl"></i>
@@ -62,70 +63,95 @@
     <!-- 英雄区域 -->
     <section class="bg-gradient-to-r from-primary to-secondary text-white py-16">
         <div class="container mx-auto px-4 text-center">
-            <h2 class="text-4xl md:text-5xl font-bold mb-4 text-shadow">个性化溜娃路线</h2>
-            <p class="text-xl mb-8 max-w-2xl mx-auto">输入您的溜娃时间和预算，我们为您推荐上海本地最适合的溜娃地点</p>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 text-shadow">每日个性化溜娃路线</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">每日不重复，多维度智能匹配，解决家长溜娃没思路、路线单一的问题</p>
             <div class="flex justify-center">
-                <a href="#form" class="bg-accent hover:bg-orange-500 text-white font-bold py-3 px-6 rounded-full transition-colors shadow-lg">
-                    开始定制
-                </a>
+                <button id="oneClickGenerate" class="bg-accent hover:bg-orange-500 text-white font-bold py-3 px-8 rounded-full transition-colors shadow-lg">
+                    一键生成路线
+                </button>
             </div>
         </div>
     </section>
 
-    <!-- 表单区域 -->
-    <section id="form" class="py-12">
+    <!-- 筛选区域 -->
+    <section id="filter" class="py-12 bg-white">
         <div class="container mx-auto px-4">
-            <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-6 md:p-8">
-                <h3 class="text-2xl font-bold mb-6 text-center text-gray-800">填写溜娃需求</h3>
-                <form id="tripForm" class="space-y-6">
-                    <!-- 溜娃时间 -->
-                    <div>
-                        <label for="time" class="block text-gray-700 font-medium mb-2">溜娃时间</label>
-                        <select id="time" name="time" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
-                            <option value="morning">上午 (9:00-12:00)</option>
-                            <option value="afternoon">下午 (13:00-17:00)</option>
-                            <option value="evening">晚上 (18:00-21:00)</option>
-                            <option value="full-day">全天 (9:00-17:00)</option>
-                        </select>
+            <h3 class="text-2xl font-bold mb-6 text-center text-gray-800">个性化筛选</h3>
+            <div class="max-w-3xl mx-auto space-y-6">
+                <!-- 费用筛选 -->
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">费用筛选</label>
+                    <div class="flex flex-wrap gap-4">
+                        <label class="flex items-center">
+                            <input type="radio" name="cost" value="free" class="mr-2" checked>
+                            <span>免费</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="cost" value="low" class="mr-2">
+                            <span>低消（≤50元）</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="cost" value="unlimited" class="mr-2">
+                            <span>不限</span>
+                        </label>
                     </div>
+                </div>
 
-                    <!-- 是否免费 -->
-                    <div>
-                        <label class="block text-gray-700 font-medium mb-2">是否免费</label>
-                        <div class="flex space-x-4">
-                            <label class="flex items-center">
-                                <input type="radio" name="free" value="yes" class="mr-2" checked>
-                                <span>免费</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="radio" name="free" value="no" class="mr-2">
-                                <span>付费</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="radio" name="free" value="both" class="mr-2">
-                                <span>都可以</span>
-                            </label>
-                        </div>
+                <!-- 评价筛选 -->
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">评价筛选</label>
+                    <div class="flex flex-wrap gap-4">
+                        <label class="flex items-center">
+                            <input type="radio" name="rating" value="4.0" class="mr-2" checked>
+                            <span>4.0分及以上</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="rating" value="4.5" class="mr-2">
+                            <span>4.5分及以上</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="rating" value="unlimited" class="mr-2">
+                            <span>不限</span>
+                        </label>
                     </div>
+                </div>
 
-                    <!-- 孩子年龄 -->
-                    <div>
-                        <label for="age" class="block text-gray-700 font-medium mb-2">孩子年龄</label>
-                        <select id="age" name="age" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
-                            <option value="0-3">0-3岁</option>
-                            <option value="3-6">3-6岁</option>
-                            <option value="6-12">6-12岁</option>
-                            <option value="all">不限</option>
-                        </select>
+                <!-- 场景筛选 -->
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">场景筛选</label>
+                    <div class="flex flex-wrap gap-4">
+                        <label class="flex items-center">
+                            <input type="radio" name="scene" value="outdoor" class="mr-2" checked>
+                            <span>户外（公园/广场/自然景区）</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="scene" value="indoor" class="mr-2">
+                            <span>室内（绘本馆/科技馆/亲子乐园）</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="scene" value="unlimited" class="mr-2">
+                            <span>不限</span>
+                        </label>
                     </div>
+                </div>
 
-                    <!-- 提交按钮 -->
-                    <div class="text-center">
-                        <button type="submit" class="bg-primary hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full transition-colors shadow-lg">
-                            生成路线
-                        </button>
-                    </div>
-                </form>
+                <!-- 孩子年龄 -->
+                <div>
+                    <label for="age" class="block text-gray-700 font-medium mb-2">孩子年龄</label>
+                    <select id="age" name="age" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                        <option value="0-3">0-3岁</option>
+                        <option value="3-6" selected>3-6岁</option>
+                        <option value="6-12">6-12岁</option>
+                        <option value="all">不限</option>
+                    </select>
+                </div>
+
+                <!-- 提交按钮 -->
+                <div class="text-center">
+                    <button id="generateRoute" class="bg-primary hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full transition-colors shadow-lg">
+                        生成路线
+                    </button>
+                </div>
             </div>
         </div>
     </section>
@@ -133,9 +159,31 @@
     <!-- 结果区域 -->
     <section id="results" class="py-12 bg-gray-100 hidden">
         <div class="container mx-auto px-4">
-            <h3 class="text-2xl font-bold mb-8 text-center text-gray-800">为您推荐的溜娃路线</h3>
-            <div id="recommendations" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- 推荐结果将通过JavaScript动态生成 -->
+            <h3 class="text-2xl font-bold mb-8 text-center text-gray-800">今日推荐路线</h3>
+            <div id="routeResult" class="max-w-3xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+                <!-- 路线结果将通过JavaScript动态生成 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 历史记录 -->
+    <section id="history" class="py-12">
+        <div class="container mx-auto px-4">
+            <h3 class="text-2xl font-bold mb-8 text-center text-gray-800">历史记录</h3>
+            <div id="historyList" class="max-w-3xl mx-auto space-y-4">
+                <!-- 历史记录将通过JavaScript动态生成 -->
+                <p class="text-center text-gray-500">暂无历史记录</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 我的收藏 -->
+    <section id="favorites" class="py-12 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h3 class="text-2xl font-bold mb-8 text-center text-gray-800">我的收藏</h3>
+            <div id="favoritesList" class="max-w-3xl mx-auto space-y-4">
+                <!-- 收藏记录将通过JavaScript动态生成 -->
+                <p class="text-center text-gray-500">暂无收藏路线</p>
             </div>
         </div>
     </section>
@@ -145,31 +193,9 @@
         <div class="container mx-auto px-4">
             <h3 class="text-2xl font-bold mb-6 text-center text-gray-800">关于我们</h3>
             <div class="max-w-3xl mx-auto text-gray-600 leading-relaxed">
-                <p class="mb-4">上海溜娃路线定制网站致力于为家长提供个性化的溜娃路线推荐，帮助您在上海找到最适合孩子的游玩场所。</p>
-                <p class="mb-4">我们的推荐基于孩子的年龄、溜娃时间和预算等因素，为您精选上海本地的优质溜娃地点，让您的亲子时光更加愉快。</p>
-                <p>无论您是想寻找免费的公园、付费的儿童乐园，还是适合不同年龄段孩子的活动，我们都能为您提供合适的推荐。</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 联系我们 -->
-    <section id="contact" class="py-12 bg-gray-100">
-        <div class="container mx-auto px-4">
-            <h3 class="text-2xl font-bold mb-6 text-center text-gray-800">联系我们</h3>
-            <div class="max-w-2xl mx-auto text-center text-gray-600">
-                <p class="mb-4">如果您有任何建议或问题，欢迎联系我们</p>
-                <div class="flex justify-center space-x-6 mb-4">
-                    <a href="#" class="text-primary hover:text-green-600 transition-colors">
-                        <i class="fa fa-weixin text-2xl"></i>
-                    </a>
-                    <a href="#" class="text-primary hover:text-green-600 transition-colors">
-                        <i class="fa fa-weibo text-2xl"></i>
-                    </a>
-                    <a href="#" class="text-primary hover:text-green-600 transition-colors">
-                        <i class="fa fa-envelope text-2xl"></i>
-                    </a>
-                </div>
-                <p>邮箱：contact@shanghaitrip.com</p>
+                <p class="mb-4">每日个性化溜娃路线生成网站致力于为家长提供智能、个性化的溜娃路线推荐，帮助您解决溜娃没思路、路线单一的问题。</p>
+                <p class="mb-4">我们的推荐基于多维度智能匹配，包括季节适配、天气适配、人流适配等因素，确保为您推荐最适合的溜娃地点。</p>
+                <p>我们承诺每日生成不重复的路线，让您的亲子时光更加丰富多彩。</p>
             </div>
         </div>
     </section>
@@ -177,185 +203,656 @@
     <!-- 页脚 -->
     <footer class="bg-gray-800 text-white py-6">
         <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2026 上海溜娃路线定制. 保留所有权利.</p>
+            <p>&copy; 2026 每日个性化溜娃路线生成. 保留所有权利.</p>
         </div>
     </footer>
 
     <script>
-        // 上海本地溜娃地点数据库
+        // 上海本地溜娃地点数据库（增强版）
         const locations = [
             {
+                id: 1,
                 name: "上海迪士尼乐园",
                 address: "上海市浦东新区川沙新镇黄赵路310号",
                 time: ["morning", "afternoon", "full-day"],
-                free: false,
+                cost: "high",
+                price: 575,
                 age: ["3-6", "6-12"],
                 description: "世界一流的主题乐园，适合全家人游玩，有各种适合儿童的游乐设施和表演。",
                 image: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Shanghai%20Disneyland%20castle%20with%20colorful%20fireworks%20at%20night&image_size=landscape_16_9",
-                rating: 4.8
+                rating: 4.8,
+                scene: "outdoor",
+                duration: "6-8小时",
+                highlights: ["有城堡", "适合拍照", "有表演", "适合全家人"],
+                season: ["spring", "summer", "autumn", "winter"],
+                weather: ["sunny", "cloudy"],
+                crowd: "high",
+                parking: true
             },
             {
+                id: 2,
                 name: "上海野生动物园",
                 address: "上海市浦东新区南六公路178号",
                 time: ["morning", "afternoon", "full-day"],
-                free: false,
+                cost: "medium",
+                price: 130,
                 age: ["0-3", "3-6", "6-12"],
                 description: "中国最大的野生动物园之一，有各种珍稀动物，适合带孩子了解动物世界。",
                 image: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Shanghai%20Wild%20Animal%20Park%20with%20giraffes%20and%20elephants&image_size=landscape_16_9",
-                rating: 4.6
+                rating: 4.6,
+                scene: "outdoor",
+                duration: "4-6小时",
+                highlights: ["有动物表演", "适合科普", "有小火车", "适合亲子"],
+                season: ["spring", "autumn"],
+                weather: ["sunny", "cloudy"],
+                crowd: "medium",
+                parking: true
             },
             {
+                id: 3,
                 name: "上海科技馆",
                 address: "上海市浦东新区世纪大道2000号",
                 time: ["morning", "afternoon"],
-                free: false,
+                cost: "low",
+                price: 45,
                 age: ["3-6", "6-12"],
                 description: "互动性强的科技博物馆，有各种科学实验和展览，适合培养孩子的科学兴趣。",
                 image: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Shanghai%20Science%20and%20Technology%20Museum%20with%20interactive%20exhibits&image_size=landscape_16_9",
-                rating: 4.7
+                rating: 4.7,
+                scene: "indoor",
+                duration: "3-4小时",
+                highlights: ["互动性强", "适合科普", "有IMAX影院", "适合学龄儿童"],
+                season: ["spring", "summer", "autumn", "winter"],
+                weather: ["sunny", "cloudy", "rainy"],
+                crowd: "medium",
+                parking: true
             },
             {
+                id: 4,
                 name: "世纪公园",
                 address: "上海市浦东新区锦绣路1001号",
                 time: ["morning", "afternoon", "evening"],
-                free: true,
+                cost: "free",
+                price: 0,
                 age: ["0-3", "3-6", "6-12"],
                 description: "上海最大的城市公园，有广阔的草坪和湖泊，适合带孩子散步、野餐和玩耍。",
                 image: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Century%20Park%20Shanghai%20with%20green%20lawns%20and%20lake&image_size=landscape_16_9",
-                rating: 4.5
+                rating: 4.5,
+                scene: "outdoor",
+                duration: "2-3小时",
+                highlights: ["免费", "有草坪", "适合野餐", "适合骑行"],
+                season: ["spring", "summer", "autumn"],
+                weather: ["sunny", "cloudy"],
+                crowd: "medium",
+                parking: true
             },
             {
+                id: 5,
                 name: "上海海洋水族馆",
                 address: "上海市浦东新区陆家嘴环路1388号",
                 time: ["morning", "afternoon"],
-                free: false,
+                cost: "medium",
+                price: 160,
                 age: ["0-3", "3-6", "6-12"],
                 description: "亚洲最大的海洋水族馆之一，有各种海洋生物，适合带孩子了解海洋世界。",
                 image: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Shanghai%20Ocean%20Aquarium%20with%20underwater%20tunnel&image_size=landscape_16_9",
-                rating: 4.4
+                rating: 4.4,
+                scene: "indoor",
+                duration: "2-3小时",
+                highlights: ["有海底隧道", "适合科普", "有鲨鱼", "适合亲子"],
+                season: ["spring", "summer", "autumn", "winter"],
+                weather: ["sunny", "cloudy", "rainy"],
+                crowd: "medium",
+                parking: true
             },
             {
+                id: 6,
                 name: "鲁迅公园",
                 address: "上海市虹口区四川北路2288号",
                 time: ["morning", "afternoon", "evening"],
-                free: true,
+                cost: "free",
+                price: 0,
                 age: ["0-3", "3-6", "6-12"],
                 description: "历史悠久的城市公园，有假山、湖泊和儿童游乐设施，适合带孩子休闲游玩。",
                 image: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Lu%20Xun%20Park%20Shanghai%20with%20traditional%20Chinese%20garden&image_size=landscape_16_9",
-                rating: 4.3
+                rating: 4.3,
+                scene: "outdoor",
+                duration: "1-2小时",
+                highlights: ["免费", "有儿童设施", "适合散步", "适合休闲"],
+                season: ["spring", "summer", "autumn"],
+                weather: ["sunny", "cloudy"],
+                crowd: "low",
+                parking: false
             },
             {
+                id: 7,
                 name: "上海儿童博物馆",
                 address: "上海市长宁区宋园路61号",
                 time: ["morning", "afternoon"],
-                free: true,
+                cost: "free",
+                price: 0,
                 age: ["0-3", "3-6"],
                 description: "专为儿童设计的博物馆，有各种互动展览和游戏，适合 younger children。",
                 image: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Shanghai%20Children%20Museum%20with%20colorful%20exhibits&image_size=landscape_16_9",
-                rating: 4.2
+                rating: 4.2,
+                scene: "indoor",
+                duration: "2-3小时",
+                highlights: ["免费", "互动性强", "适合幼龄儿童", "有游戏区"],
+                season: ["spring", "summer", "autumn", "winter"],
+                weather: ["sunny", "cloudy", "rainy"],
+                crowd: "low",
+                parking: true
             },
             {
+                id: 8,
                 name: "上海环球港",
                 address: "上海市普陀区中山北路3300号",
                 time: ["morning", "afternoon", "evening"],
-                free: true,
+                cost: "free",
+                price: 0,
                 age: ["3-6", "6-12"],
                 description: "大型购物中心，有儿童游乐区和各种商店，适合带孩子购物和玩耍。",
                 image: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Shanghai%20Global%20Harbor%20shopping%20mall%20with%20glass%20ceiling&image_size=landscape_16_9",
-                rating: 4.1
+                rating: 4.1,
+                scene: "indoor",
+                duration: "3-4小时",
+                highlights: ["免费", "有儿童游乐区", "有餐饮", "适合购物"],
+                season: ["spring", "summer", "autumn", "winter"],
+                weather: ["sunny", "cloudy", "rainy"],
+                crowd: "high",
+                parking: true
             },
             {
+                id: 9,
                 name: "上海辰山植物园",
                 address: "上海市松江区辰花公路3888号",
                 time: ["morning", "afternoon"],
-                free: false,
+                cost: "low",
+                price: 60,
                 age: ["0-3", "3-6", "6-12"],
                 description: "大型植物园，有各种植物和温室，适合带孩子了解植物世界。",
                 image: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Shanghai%20Chenshan%20Botanical%20Garden%20with%20greenhouse&image_size=landscape_16_9",
-                rating: 4.4
+                rating: 4.4,
+                scene: "outdoor",
+                duration: "3-4小时",
+                highlights: ["有温室", "适合科普", "有花卉", "适合亲子"],
+                season: ["spring", "summer", "autumn"],
+                weather: ["sunny", "cloudy"],
+                crowd: "low",
+                parking: true
+            },
+            {
+                id: 10,
+                name: "上海自然博物馆",
+                address: "上海市静安区北京西路510号",
+                time: ["morning", "afternoon"],
+                cost: "low",
+                price: 30,
+                age: ["3-6", "6-12"],
+                description: "综合性自然博物馆，有丰富的自然标本和互动展览，适合带孩子了解自然科学。",
+                image: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Shanghai%20Natural%20History%20Museum%20with%20dinosaur%20exhibits&image_size=landscape_16_9",
+                rating: 4.6,
+                scene: "indoor",
+                duration: "3-4小时",
+                highlights: ["有恐龙化石", "适合科普", "互动性强", "适合学龄儿童"],
+                season: ["spring", "summer", "autumn", "winter"],
+                weather: ["sunny", "cloudy", "rainy"],
+                crowd: "medium",
+                parking: true
+            },
+            {
+                id: 11,
+                name: "徐家汇公园",
+                address: "上海市徐汇区肇嘉浜路889号",
+                time: ["morning", "afternoon", "evening"],
+                cost: "free",
+                price: 0,
+                age: ["0-3", "3-6", "6-12"],
+                description: "位于市中心的城市公园，有湖泊、草坪和儿童游乐设施，适合带孩子休闲游玩。",
+                image: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Xujiahui%20Park%20Shanghai%20with%20lake%20and%20green%20areas&image_size=landscape_16_9",
+                rating: 4.3,
+                scene: "outdoor",
+                duration: "1-2小时",
+                highlights: ["免费", "市中心", "有儿童设施", "适合休闲"],
+                season: ["spring", "summer", "autumn"],
+                weather: ["sunny", "cloudy"],
+                crowd: "medium",
+                parking: false
+            },
+            {
+                id: 12,
+                name: "上海乐高探索中心",
+                address: "上海市普陀区大渡河路196号长风景畔广场2楼",
+                time: ["morning", "afternoon", "evening"],
+                cost: "medium",
+                price: 180,
+                age: ["3-6", "6-12"],
+                description: "以乐高为主题的室内游乐中心，有各种乐高搭建和互动游戏，适合乐高爱好者。",
+                image: "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Shanghai%20LEGO%20Discovery%20Center%20with%20colorful%20LEGO%20exhibits&image_size=landscape_16_9",
+                rating: 4.5,
+                scene: "indoor",
+                duration: "2-3小时",
+                highlights: ["乐高主题", "互动性强", "适合乐高爱好者", "有创意工坊"],
+                season: ["spring", "summer", "autumn", "winter"],
+                weather: ["sunny", "cloudy", "rainy"],
+                crowd: "medium",
+                parking: true
             }
         ];
 
-        // 表单提交处理
-        document.getElementById('tripForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        // 本地存储管理
+        const storage = {
+            // 获取已查看的路线
+            getViewedRoutes: function() {
+                const viewed = localStorage.getItem('viewedRoutes');
+                return viewed ? JSON.parse(viewed) : [];
+            },
             
-            // 获取表单数据
-            const time = document.getElementById('time').value;
-            const free = document.querySelector('input[name="free"]:checked').value;
+            // 添加已查看的路线
+            addViewedRoute: function(routeId) {
+                const viewed = this.getViewedRoutes();
+                if (!viewed.includes(routeId)) {
+                    viewed.push(routeId);
+                    // 只保留最近30天的记录
+                    if (viewed.length > 30) {
+                        viewed.shift();
+                    }
+                    localStorage.setItem('viewedRoutes', JSON.stringify(viewed));
+                }
+            },
+            
+            // 获取收藏的路线
+            getFavorites: function() {
+                const favorites = localStorage.getItem('favorites');
+                return favorites ? JSON.parse(favorites) : [];
+            },
+            
+            // 添加收藏的路线
+            addFavorite: function(routeId) {
+                const favorites = this.getFavorites();
+                if (!favorites.includes(routeId)) {
+                    favorites.push(routeId);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+            },
+            
+            // 移除收藏的路线
+            removeFavorite: function(routeId) {
+                const favorites = this.getFavorites();
+                const index = favorites.indexOf(routeId);
+                if (index > -1) {
+                    favorites.splice(index, 1);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+            },
+            
+            // 获取历史记录
+            getHistory: function() {
+                const history = localStorage.getItem('history');
+                return history ? JSON.parse(history) : [];
+            },
+            
+            // 添加历史记录
+            addHistory: function(route) {
+                const history = this.getHistory();
+                history.unshift(route);
+                // 只保留最近20条记录
+                if (history.length > 20) {
+                    history.pop();
+                }
+                localStorage.setItem('history', JSON.stringify(history));
+            }
+        };
+
+        // 获取当前季节
+        function getCurrentSeason() {
+            const month = new Date().getMonth() + 1;
+            if (month >= 3 && month <= 5) return 'spring';
+            if (month >= 6 && month <= 8) return 'summer';
+            if (month >= 9 && month <= 11) return 'autumn';
+            return 'winter';
+        }
+
+        // 获取当前天气（模拟数据，实际项目中应调用天气API）
+        function getCurrentWeather() {
+            // 模拟天气数据
+            const weathers = ['sunny', 'cloudy', 'rainy'];
+            return weathers[Math.floor(Math.random() * weathers.length)];
+        }
+
+        // 获取当前是工作日还是周末
+        function getCurrentDayType() {
+            const day = new Date().getDay();
+            return day === 0 || day === 6 ? 'weekend' : 'weekday';
+        }
+
+        // 获取当前时段
+        function getCurrentTimeSlot() {
+            const hour = new Date().getHours();
+            if (hour >= 6 && hour < 12) return 'morning';
+            if (hour >= 12 && hour < 18) return 'afternoon';
+            return 'evening';
+        }
+
+        // 智能过滤地点
+        function filterLocations() {
+            // 获取筛选条件
+            const cost = document.querySelector('input[name="cost"]:checked').value;
+            const rating = document.querySelector('input[name="rating"]:checked').value;
+            const scene = document.querySelector('input[name="scene"]:checked').value;
             const age = document.getElementById('age').value;
             
+            // 获取智能适配参数
+            const season = getCurrentSeason();
+            const weather = getCurrentWeather();
+            const dayType = getCurrentDayType();
+            const timeSlot = getCurrentTimeSlot();
+            
+            // 获取已查看的路线
+            const viewedRoutes = storage.getViewedRoutes();
+            
             // 过滤地点
-            const filteredLocations = locations.filter(location => {
-                // 时间过滤
-                const timeMatch = location.time.includes(time) || location.time.includes('full-day');
-                
-                // 免费过滤
-                let freeMatch = false;
-                if (free === 'yes') {
-                    freeMatch = location.free;
-                } else if (free === 'no') {
-                    freeMatch = !location.free;
-                } else {
-                    freeMatch = true;
+            const filtered = locations.filter(location => {
+                // 排除已查看的路线
+                if (viewedRoutes.includes(location.id)) {
+                    return false;
                 }
+                
+                // 费用过滤
+                let costMatch = false;
+                if (cost === 'free') {
+                    costMatch = location.cost === 'free';
+                } else if (cost === 'low') {
+                    costMatch = location.cost === 'free' || location.price <= 50;
+                } else {
+                    costMatch = true;
+                }
+                
+                // 评价过滤
+                let ratingMatch = false;
+                if (rating === '4.0') {
+                    ratingMatch = location.rating >= 4.0;
+                } else if (rating === '4.5') {
+                    ratingMatch = location.rating >= 4.5;
+                } else {
+                    ratingMatch = true;
+                }
+                
+                // 场景过滤
+                const sceneMatch = scene === 'unlimited' || location.scene === scene;
                 
                 // 年龄过滤
                 const ageMatch = location.age.includes(age) || location.age.includes('all');
                 
-                return timeMatch && freeMatch && ageMatch;
+                // 季节适配
+                const seasonMatch = location.season.includes(season);
+                
+                // 天气适配
+                const weatherMatch = location.weather.includes(weather);
+                
+                // 人流适配
+                let crowdMatch = true;
+                if (dayType === 'weekend' && timeSlot === 'afternoon') {
+                    // 周末下午避开高人流地点
+                    crowdMatch = location.crowd !== 'high';
+                }
+                
+                return costMatch && ratingMatch && sceneMatch && ageMatch && seasonMatch && weatherMatch && crowdMatch;
             });
             
-            // 显示结果
-            displayResults(filteredLocations);
-        });
+            return filtered;
+        }
 
-        // 显示结果
-        function displayResults(locations) {
-            const resultsSection = document.getElementById('results');
-            const recommendationsDiv = document.getElementById('recommendations');
+        // 生成路线
+        function generateRoute() {
+            const filteredLocations = filterLocations();
             
-            // 清空之前的结果
-            recommendationsDiv.innerHTML = '';
-            
-            // 生成结果卡片
-            locations.forEach(location => {
-                const card = document.createElement('div');
-                card.className = 'bg-white rounded-lg shadow-md overflow-hidden card-hover';
-                
-                card.innerHTML = `
-                    <img src="${location.image}" alt="${location.name}" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <div class="flex justify-between items-start mb-2">
-                            <h4 class="text-xl font-bold text-gray-800">${location.name}</h4>
-                            <span class="bg-${location.free ? 'green' : 'blue'}-100 text-${location.free ? 'green' : 'blue'}-800 text-xs font-medium px-2.5 py-0.5 rounded">
-                                ${location.free ? '免费' : '付费'}
-                            </span>
-                        </div>
-                        <div class="flex items-center mb-2">
-                            <i class="fa fa-map-marker text-red-500 mr-2"></i>
-                            <p class="text-gray-600 text-sm">${location.address}</p>
-                        </div>
-                        <div class="flex items-center mb-3">
-                            <i class="fa fa-star text-yellow-400 mr-1"></i>
-                            <span class="text-gray-700">${location.rating}</span>
-                        </div>
-                        <p class="text-gray-600 text-sm mb-4">${location.description}</p>
-                        <button class="w-full bg-primary hover:bg-green-600 text-white font-medium py-2 px-4 rounded transition-colors">
-                            查看详情
+            if (filteredLocations.length === 0) {
+                // 如果没有符合条件的地点，显示提示
+                document.getElementById('routeResult').innerHTML = `
+                    <div class="p-6 text-center">
+                        <i class="fa fa-info-circle text-4xl text-gray-400 mb-4"></i>
+                        <h4 class="text-xl font-bold text-gray-800 mb-2">暂无符合条件的路线</h4>
+                        <p class="text-gray-600 mb-4">请尝试调整筛选条件，或稍后再试</p>
+                        <button onclick="generateRoute()" class="bg-primary hover:bg-green-600 text-white font-medium py-2 px-4 rounded transition-colors">
+                            重新生成
                         </button>
                     </div>
                 `;
-                
-                recommendationsDiv.appendChild(card);
-            });
+                document.getElementById('results').classList.remove('hidden');
+                document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
             
-            // 显示结果区域
-            resultsSection.classList.remove('hidden');
+            // 随机选择一个地点作为最优路线
+            const randomIndex = Math.floor(Math.random() * filteredLocations.length);
+            const selectedRoute = filteredLocations[randomIndex];
             
-            // 滚动到结果区域
-            resultsSection.scrollIntoView({ behavior: 'smooth' });
+            // 选择一个备选方案
+            let alternativeRoute = null;
+            if (filteredLocations.length > 1) {
+                let altIndex = Math.floor(Math.random() * filteredLocations.length);
+                while (altIndex === randomIndex) {
+                    altIndex = Math.floor(Math.random() * filteredLocations.length);
+                }
+                alternativeRoute = filteredLocations[altIndex];
+            }
+            
+            // 保存到已查看记录
+            storage.addViewedRoute(selectedRoute.id);
+            
+            // 保存到历史记录
+            storage.addHistory(selectedRoute);
+            
+            // 显示路线结果
+            displayRoute(selectedRoute, alternativeRoute);
+            
+            // 更新历史记录和收藏列表
+            updateHistoryList();
+            updateFavoritesList();
         }
+
+        // 显示路线结果
+        function displayRoute(route, alternative) {
+            const routeResult = document.getElementById('routeResult');
+            
+            routeResult.innerHTML = `
+                <div class="relative">
+                    <img src="${route.image}" alt="${route.name}" class="w-full h-64 object-cover">
+                    <div class="absolute top-4 right-4 flex space-x-2">
+                        <button onclick="toggleFavorite(${route.id})" class="bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors">
+                            <i class="fa ${storage.getFavorites().includes(route.id) ? 'fa-heart text-red-500' : 'fa-heart-o text-gray-600'}"></i>
+                        </button>
+                        <button onclick="regenerateRoute()" class="bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors">
+                            <i class="fa fa-refresh text-gray-600"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h4 class="text-2xl font-bold text-gray-800">${route.name}</h4>
+                        <span class="bg-${route.cost === 'free' ? 'green' : route.cost === 'low' ? 'blue' : 'orange'}-100 text-${route.cost === 'free' ? 'green' : route.cost === 'low' ? 'blue' : 'orange'}-800 text-xs font-medium px-2.5 py-0.5 rounded">
+                            ${route.cost === 'free' ? '免费' : route.cost === 'low' ? '低消' : '付费'}
+                        </span>
+                    </div>
+                    <div class="flex items-center mb-3">
+                        <i class="fa fa-map-marker text-red-500 mr-2"></i>
+                        <p class="text-gray-600">${route.address}</p>
+                    </div>
+                    <div class="flex items-center mb-3">
+                        <i class="fa fa-clock-o text-gray-500 mr-2"></i>
+                        <p class="text-gray-600">推荐游玩时长：${route.duration}</p>
+                    </div>
+                    <div class="flex items-center mb-4">
+                        <i class="fa fa-star text-yellow-400 mr-2"></i>
+                        <p class="text-gray-600">评分：${route.rating}</p>
+                    </div>
+                    <div class="mb-4">
+                        <h5 class="font-medium text-gray-800 mb-2">核心亮点：</h5>
+                        <div class="flex flex-wrap gap-2">
+                            ${route.highlights.map(highlight => `
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">
+                                    ${highlight}
+                                </span>
+                            `).join('')}
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">${route.description}</p>
+                    ${route.parking ? `<p class="text-green-600 mb-6"><i class="fa fa-check-circle mr-2"></i> 有免费停车</p>` : `<p class="text-red-600 mb-6"><i class="fa fa-times-circle mr-2"></i> 无免费停车</p>`}
+                    ${alternative ? `
+                        <div class="border-t border-gray-200 pt-4">
+                            <h5 class="font-medium text-gray-800 mb-3">备选方案：</h5>
+                            <div class="flex items-center">
+                                <img src="${alternative.image}" alt="${alternative.name}" class="w-20 h-20 object-cover rounded-md mr-4">
+                                <div>
+                                    <h6 class="font-medium text-gray-800">${alternative.name}</h6>
+                                    <p class="text-sm text-gray-600">${alternative.address}</p>
+                                </div>
+                            </div>
+                        </div>
+                    ` : ''}
+                    <div class="mt-6 flex space-x-4">
+                        <button onclick="regenerateRoute()" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded transition-colors">
+                            重新生成
+                        </button>
+                        <button onclick="markUnsatisfactory()" class="flex-1 bg-red-100 hover:bg-red-200 text-red-800 font-medium py-2 px-4 rounded transition-colors">
+                            路线不满意
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('results').classList.remove('hidden');
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 重新生成路线
+        function regenerateRoute() {
+            generateRoute();
+        }
+
+        // 标记路线不满意
+        function markUnsatisfactory() {
+            // 这里可以添加反馈逻辑，例如记录不满意的原因
+            alert('感谢您的反馈，我们会改进推荐算法！');
+            regenerateRoute();
+        }
+
+        // 切换收藏状态
+        function toggleFavorite(routeId) {
+            const favorites = storage.getFavorites();
+            if (favorites.includes(routeId)) {
+                storage.removeFavorite(routeId);
+            } else {
+                storage.addFavorite(routeId);
+            }
+            // 更新当前路线的收藏状态
+            const favoriteBtn = document.querySelector(`button[onclick="toggleFavorite(${routeId})"] i`);
+            if (favoriteBtn) {
+                if (storage.getFavorites().includes(routeId)) {
+                    favoriteBtn.className = 'fa fa-heart text-red-500';
+                } else {
+                    favoriteBtn.className = 'fa fa-heart-o text-gray-600';
+                }
+            }
+            // 更新收藏列表
+            updateFavoritesList();
+        }
+
+        // 更新历史记录列表
+        function updateHistoryList() {
+            const history = storage.getHistory();
+            const historyList = document.getElementById('historyList');
+            
+            if (history.length === 0) {
+                historyList.innerHTML = '<p class="text-center text-gray-500">暂无历史记录</p>';
+                return;
+            }
+            
+            historyList.innerHTML = history.map(route => `
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="flex">
+                        <img src="${route.image}" alt="${route.name}" class="w-32 h-32 object-cover">
+                        <div class="flex-1 p-4">
+                            <h4 class="font-bold text-gray-800 mb-1">${route.name}</h4>
+                            <p class="text-sm text-gray-600 mb-2">${route.address}</p>
+                            <div class="flex items-center mb-2">
+                                <i class="fa fa-star text-yellow-400 mr-1"></i>
+                                <span class="text-sm text-gray-600">${route.rating}</span>
+                            </div>
+                            <button onclick="viewRoute(${route.id})" class="text-primary hover:text-green-600 text-sm">
+                                查看详情
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 更新收藏列表
+        function updateFavoritesList() {
+            const favorites = storage.getFavorites();
+            const favoritesList = document.getElementById('favoritesList');
+            
+            if (favorites.length === 0) {
+                favoritesList.innerHTML = '<p class="text-center text-gray-500">暂无收藏路线</p>';
+                return;
+            }
+            
+            const favoriteRoutes = locations.filter(route => favorites.includes(route.id));
+            
+            favoritesList.innerHTML = favoriteRoutes.map(route => `
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="flex">
+                        <img src="${route.image}" alt="${route.name}" class="w-32 h-32 object-cover">
+                        <div class="flex-1 p-4">
+                            <div class="flex justify-between items-start mb-1">
+                                <h4 class="font-bold text-gray-800">${route.name}</h4>
+                                <button onclick="toggleFavorite(${route.id})" class="text-red-500 hover:text-red-600">
+                                    <i class="fa fa-heart"></i>
+                                </button>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-2">${route.address}</p>
+                            <div class="flex items-center mb-2">
+                                <i class="fa fa-star text-yellow-400 mr-1"></i>
+                                <span class="text-sm text-gray-600">${route.rating}</span>
+                            </div>
+                            <button onclick="viewRoute(${route.id})" class="text-primary hover:text-green-600 text-sm">
+                                查看详情
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 查看路线详情
+        function viewRoute(routeId) {
+            const route = locations.find(r => r.id === routeId);
+            if (route) {
+                displayRoute(route);
+            }
+        }
+
+        // 一键生成路线
+        document.getElementById('oneClickGenerate').addEventListener('click', function() {
+            generateRoute();
+        });
+
+        // 生成路线按钮
+        document.getElementById('generateRoute').addEventListener('click', function() {
+            generateRoute();
+        });
+
+        // 初始化页面
+        function init() {
+            // 更新历史记录和收藏列表
+            updateHistoryList();
+            updateFavoritesList();
+        }
+
+        // 页面加载完成后初始化
+        window.onload = init;
     </script>
 </body>
 </html>
